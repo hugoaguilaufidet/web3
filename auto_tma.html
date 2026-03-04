@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TMA - Taller de Máquinas | I.E.S. 6036</title>
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -16,7 +15,6 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --accent-glow: #3b82f6;
-            /* Blue 500 */
             --glass-bg: rgba(30, 41, 59, 0.4);
             --glass-hover: rgba(30, 41, 59, 0.7);
             --glass-border: rgba(255, 255, 255, 0.1);
@@ -48,7 +46,6 @@
             position: absolute;
             z-index: -1;
             opacity: 0.8;
-            /* Aumentado para destacarlo */
             pointer-events: none;
             mix-blend-mode: screen;
             filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.4));
@@ -61,7 +58,6 @@
             animation: float 8s ease-in-out infinite, rotateSlow 30s linear infinite;
         }
 
-        /* Nav / Header secundario */
         nav {
             width: 100%;
             max-width: 1200px;
@@ -86,12 +82,6 @@
             border: 1px solid var(--glass-border);
         }
 
-        .back-link:hover {
-            color: var(--text-main);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* ===== CONTENEDOR PRINCIPAL ===== */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -102,7 +92,6 @@
             z-index: 1;
         }
 
-        /* ===== HERO SECTION ===== */
         .hero {
             text-align: left;
             margin-bottom: 2rem;
@@ -167,6 +156,7 @@
             animation: fadeInUp 0.8s ease-out forwards;
         }
 
+        /* FIX: Agregado pointer-events: none para que no bloquee los clics */
         .bento-card::before {
             content: '';
             position: absolute;
@@ -177,6 +167,8 @@
             background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.05), transparent);
             opacity: 0;
             transition: opacity 0.5s ease;
+            pointer-events: none; 
+            z-index: 0;
         }
 
         .bento-card:hover {
@@ -186,11 +178,8 @@
             border-color: rgba(96, 165, 250, 0.3);
         }
 
-        .bento-card:hover::before {
-            opacity: 1;
-        }
+        .bento-card:hover::before { opacity: 1; }
 
-        /* Tipografías de las tarjetas */
         .card-header {
             font-size: 1.25rem;
             font-weight: 600;
@@ -201,48 +190,12 @@
             color: var(--text-main);
         }
 
-        .card-header svg {
-            color: var(--accent-glow);
-        }
+        .card-header svg { color: var(--accent-glow); }
 
-        /* Tamaños de las tarjetas Bento */
-        .card-tall {
-            grid-row: span 2;
-        }
+        .card-tall { grid-row: span 2; }
+        .card-wide { grid-column: span 2; }
 
-        .card-wide {
-            grid-column: span 2;
-        }
-
-        @media (max-width: 900px) {
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .card-tall {
-                grid-row: span 1;
-                grid-column: span 2;
-            }
-
-            .card-wide {
-                grid-column: span 2;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card-tall,
-            .card-wide {
-                grid-column: span 1;
-            }
-        }
-
-        /* Contenidos específicos de las tarjetas */
-
-        /* 1. Cronograma */
+        /* Estilo del Botón */
         .btn-schedule {
             margin-top: auto;
             display: inline-flex;
@@ -257,238 +210,63 @@
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 2; /* Asegura que esté por encima de todo */
         }
 
         .btn-schedule:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+            filter: brightness(1.1);
         }
 
-        /* 2. Ruta de Aprendizaje (FAQ modernizado) */
-        .learning-path {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            position: relative;
-        }
+        /* Ruta de Aprendizaje */
+        .learning-path { list-style: none; display: flex; flex-direction: column; gap: 1.2rem; position: relative; }
+        .learning-path::before { content: ''; position: absolute; left: 11px; top: 10px; bottom: 10px; width: 2px; background: rgba(255, 255, 255, 0.1); }
+        .step { display: flex; gap: 1rem; align-items: flex-start; position: relative; }
+        .step-num { width: 24px; height: 24px; background: var(--bg-color); border: 2px solid var(--accent-glow); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; color: var(--accent-glow); flex-shrink: 0; z-index: 1; }
+        .step-content h4 { font-size: 1rem; color: #fff; margin-bottom: 0.2rem; }
+        .step-content p { font-size: 0.85rem; color: var(--text-muted); }
 
-        .learning-path::before {
-            content: '';
-            position: absolute;
-            left: 11px;
-            top: 10px;
-            bottom: 10px;
-            width: 2px;
-            background: rgba(255, 255, 255, 0.1);
-        }
+        /* Recursos y Normativas */
+        .resource-list { display: flex; flex-direction: column; gap: 1rem; }
+        .resource-link { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; text-decoration: none; transition: all 0.2s ease; position: relative; z-index: 2; }
+        .resource-link:hover { background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3); }
+        .icon-box { background: rgba(255, 255, 255, 0.1); padding: 0.5rem; border-radius: 8px; color: var(--text-main); }
+        .resource-info h4 { font-size: 0.95rem; color: #fff; }
+        .resource-info p { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; }
 
-        .step {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-            position: relative;
-        }
+        /* Galería / Salón de la Fama */
+        .hall-of-fame-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .project-card { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; background: #1e293b; display: flex; align-items: flex-end; padding: 1rem; text-decoration: none; border: 1px solid var(--glass-border); z-index: 2; }
+        .project-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent); z-index: 1; }
+        .project-info { position: relative; z-index: 2; }
+        .project-info h4 { color: #fff; font-size: 0.9rem; }
+        .project-info span { color: var(--neon-blue); font-size: 0.75rem; font-weight: 600; }
+        .project-card:hover { border-color: var(--accent-glow); }
 
-        .step-num {
-            width: 24px;
-            height: 24px;
-            background: var(--bg-color);
-            border: 2px solid var(--accent-glow);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: 800;
-            color: var(--accent-glow);
-            flex-shrink: 0;
-            z-index: 1;
-        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-30px); } 100% { transform: translateY(0px); } }
 
-        .step-content h4 {
-            font-size: 1rem;
-            color: #fff;
-            margin-bottom: 0.2rem;
-        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
 
-        .step-content p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* 3. Recursos y Normativas */
-        .resource-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .resource-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .resource-link:hover {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-
-        .icon-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem;
-            border-radius: 8px;
-            color: var(--text-main);
-        }
-
-        .resource-info h4 {
-            font-size: 0.95rem;
-            color: #fff;
-        }
-
-        .resource-info p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 0.2rem;
-        }
-
-        /* 4. Galería / Salón de la Fama */
-        .hall-of-fame-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .project-card {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            background: #1e293b;
-            display: flex;
-            align-items: flex-end;
-            padding: 1rem;
-            text-decoration: none;
-            border: 1px solid var(--glass-border);
-        }
-
-        .project-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            z-index: 1;
-        }
-
-        .project-info {
-            position: relative;
-            z-index: 2;
-        }
-
-        .project-info h4 {
-            color: #fff;
-            font-size: 0.9rem;
-        }
-
-        .project-info span {
-            color: var(--neon-blue);
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .project-card:hover {
-            border-color: var(--accent-glow);
-        }
-
-
-        /* ===== KEYFRAMES ===== */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes rotateSlow {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-30px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        /* Retrasos Animación */
-        .delay-1 {
-            animation-delay: 0.1s;
-        }
-
-        .delay-2 {
-            animation-delay: 0.2s;
-        }
-
-        .delay-3 {
-            animation-delay: 0.3s;
-        }
-
-        .delay-4 {
-            animation-delay: 0.4s;
-        }
+        @media (max-width: 900px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } .card-tall { grid-row: span 1; grid-column: span 2; } .card-wide { grid-column: span 2; } }
+        @media (max-width: 600px) { .bento-grid { grid-template-columns: 1fr; } .card-tall, .card-wide { grid-column: span 1; } }
     </style>
 </head>
 
 <body>
 
-    <!-- Imagen 3D adaptada con mix-blend-mode -->
     <img src="wrench.png" alt="Llave inglesa 3D" class="bg-3d-element wrench-bg">
 
     <nav>
         <a href="index.html" class="back-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M19 12H5" />
-                <path d="m12 19-7-7 7-7" />
-            </svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
             Volver al Inicio
         </a>
     </nav>
@@ -497,44 +275,30 @@
         <header class="hero">
             <span class="badge">Autotrónica • 2026</span>
             <h1>Taller de Máquinas (TMA)</h1>
-            <p>Sistemas mecánicos vehiculares, trabajemos com máxima seguridad, mediciones, tornería, soldadura, 
-                uso de herramientas digitales y más...., tu espacio para crear y aprender.</p>
+            <p>Sistemas mecánicos vehiculares, trabajemos con máxima seguridad, mediciones, tornería, soldadura, uso de herramientas digitales y más..., tu espacio para crear y aprender.</p>
         </header>
 
         <main class="bento-grid">
 
-            <!-- TARJETA 1: CRONOGRAMA -->
             <div class="bento-card delay-1">
                 <div class="card-header">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-                        <line x1="16" x2="16" y1="2" y2="6" />
-                        <line x1="8" x2="8" y1="2" y2="6" />
-                        <line x1="3" x2="21" y1="10" y2="10" />
-                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /></svg>
                     Organización
                 </div>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Accedé al planificador
-                    online para ver fechas de entregas, exámenes y temas clase a clase.</p>
-                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vToTXLDQs_4jsoloOBLhaHbrn9wbSXGQcfBP41pAUQZ7kx1vU2jL6BDiXpkfSVFFzcN-TS5c4fKqmfs/pubhtml"
-                    target="_blank" class="btn-schedule">
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Accedé al planificador online para ver fechas de entregas, cuestionarios y temas clase a clase.</p>
+                
+                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vToTXLDQs_4jsoloOBLhaHbrn9wbSXGQcfBP41pAUQZ7kx1vU2jL6BDiXpkfSVFFzcN-TS5c4fKqmfs/pubhtml" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="btn-schedule">
                     Ver Cronograma de Clases
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" x2="21" y1="14" y2="3" />
-                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" x2="21" y1="14" y2="3" /></svg>
                 </a>
             </div>
 
-            <!-- TARJETA 2: RUTA DE APRENDIZAJE (FAQ) -->
             <div class="bento-card card-tall delay-2">
                 <div class="card-header">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="m18 16 4-4-4-4" />
-                        <path d="m6 8-4 4 4 4" />
-                        <path d="m14.5 4-5 16" />
-                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 16 4-4-4-4" /><path d="m6 8-4 4 4 4" /><path d="m14.5 4-5 16" /></svg>
                     Ruta de Aprendizaje
                 </div>
                 <div style="margin-top: 1.5rem;">
@@ -562,7 +326,6 @@
                         </li>
                         <li class="step">
                             <div class="step-content" style="margin-left: 40px;">
-                                <!-- Skip number for spacing example -->
                                 <h4>Evaluaciones</h4>
                                 <p>¿Cómo aprobamos?</p>
                             </div>
@@ -577,72 +340,53 @@
                 </div>
             </div>
 
-            <!-- TARJETA 3: BIBLIOGRAFIA -->
             <div class="bento-card delay-3">
                 <div class="card-header">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
-                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" /></svg>
                     Técnica y Normas
                 </div>
                 <div class="resource-list" style="margin-top: 1rem;">
-                    <a href="https://drive.google.com/file/d/100enHSRCE7hyq3NilMoRKXX8yJHWiXR1/view" target="_blank"
-                        class="resource-link">
+                    <a href="https://drive.google.com/file/d/100enHSRCE7hyq3NilMoRKXX8yJHWiXR1/view" target="_blank" rel="noopener noreferrer" class="resource-link">
                         <div class="icon-box">PDF</div>
                         <div class="resource-info">
                             <h4>Metrología para NO Metrólogos</h4>
                             <p>Conceptos fundamentales</p>
                         </div>
                     </a>
-                    <a href="https://www.argentina.gob.ar/normativa/nacional/resoluci%C3%B3n-896-1999-61323/texto?authuser=0"
-                        target="_blank" class="resource-link">
+                    <a href="https://www.argentina.gob.ar/normativa/nacional/resoluci%C3%B3n-896-1999-61323/texto?authuser=0" target="_blank" rel="noopener noreferrer" class="resource-link">
                         <div class="icon-box">LEY</div>
                         <div class="resource-info">
                             <h4>Normas EPP N° 896/1999</h4>
-                            <p>¿Qué diferencia hay con la Res. 18/2025?</p>
+                            <p>Seguridad en el taller</p>
                         </div>
                     </a>
                 </div>
             </div>
 
-            <!-- TARJETA 4: RECURSOS DIRECTOS (VIDEOS) -->
             <div class="bento-card card-wide delay-4">
                 <div class="card-header" style="justify-content: space-between;">
                     <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect width="20" height="20" x="2" y="2" rx="2.18" ry="2.18" />
-                            <line x1="7" x2="7" y1="2" y2="22" />
-                            <line x1="17" x2="17" y1="2" y2="22" />
-                            <line x1="2" x2="22" y1="12" y2="12" />
-                            <line x1="2" x2="7" y1="7" y2="7" />
-                            <line x1="2" x2="7" y1="17" y2="17" />
-                            <line x1="17" x2="22" y1="17" y2="17" />
-                            <line x1="17" x2="22" y1="7" y2="7" />
-                        </svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="2.18" ry="2.18" /><line x1="7" x2="7" y1="2" y2="22" /><line x1="17" x2="17" y1="2" y2="22" /><line x1="2" x2="22" y1="12" y2="12" /><line x1="2" x2="7" y1="7" y2="7" /><line x1="2" x2="7" y1="17" y2="17" /><line x1="17" x2="22" y1="17" y2="17" /><line x1="17" x2="22" y1="7" y2="7" /></svg>
                         Recursos Visuales
                     </div>
-                    <a href="https://drive.google.com/drive/folders/1RrDWUBGZt5Qfkx5P9ah900tc02OfOMYJ" target="_blank"
-                        style="color: var(--accent-glow); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Drive
-                        Materia →</a>
+                    <a href="https://drive.google.com/drive/folders/1RrDWUBGZt5Qfkx5P9ah900tc02OfOMYJ" target="_blank" rel="noopener noreferrer" style="color: var(--accent-glow); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Drive Materia →</a>
                 </div>
-                <div class="resource-list"
-                    style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <a href="https://www.youtube.com/watch?v=SJTwJdjGxlE" target="_blank" class="resource-link">
+                <div class="resource-list" style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <a href="https://www.youtube.com/watch?v=SJTwJdjGxlE" target="_blank" rel="noopener noreferrer" class="resource-link">
                         <div class="icon-box" style="color: #ef4444;">▶</div>
                         <div class="resource-info">
                             <h4>¿Qué son las pulgadas?</h4>
                             <p>YouTube Tutorial</p>
                         </div>
                     </a>
-                    <a href="https://www.youtube.com/watch?v=5AqFALY7AEo&t=2s" target="_blank" class="resource-link">
+                    <a href="https://www.youtube.com/watch?v=5AqFALY7AEo&t=2s" target="_blank" rel="noopener noreferrer" class="resource-link">
                         <div class="icon-box" style="color: #ef4444;">▶</div>
                         <div class="resource-info">
                             <h4>De Pulgadas a Milímetros</h4>
                             <p>Conversión rápida</p>
                         </div>
                     </a>
-                    <a href="https://www.youtube.com/watch?v=wpoOebVoO14" target="_blank" class="resource-link">
+                    <a href="https://www.youtube.com/watch?v=wpoOebVoO14" target="_blank" rel="noopener noreferrer" class="resource-link">
                         <div class="icon-box" style="color: #ef4444;">▶</div>
                         <div class="resource-info">
                             <h4>Identificación de Roscas</h4>
@@ -652,30 +396,18 @@
                 </div>
             </div>
 
-            <!-- TARJETA 5: SALON DE LA FAMA -->
             <div class="bento-card card-wide delay-4">
                 <div class="card-header">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 15V3" />
-                        <circle cx="12" cy="18" r="3" />
-                        <path d="m17 7-5-4-5 4" />
-                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3" /><circle cx="12" cy="18" r="3" /><path d="m17 7-5-4-5 4" /></svg>
                     Salón de la Fama 2025
                 </div>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Proyectos destacados desarrollados por alumnos
-                    durante la cursada anterior.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Proyectos destacados desarrollados por alumnos durante la cursada anterior.</p>
                 <div class="hall-of-fame-grid">
-                    <a href="https://www.youtube.com/watch?v=pg637DkEluQ" target="_blank" class="project-card">
-                        <div class="project-info">
-                            <span>DESTACADO</span>
-                            <h4>Mesa de Trabajo Robusta</h4>
-                        </div>
+                    <a href="https://www.youtube.com/watch?v=pg637DkEluQ" target="_blank" rel="noopener noreferrer" class="project-card">
+                        <div class="project-info"><span>DESTACADO</span><h4>Mesa de Trabajo Robusta</h4></div>
                     </a>
-                    <a href="https://www.youtube.com/watch?v=mjr5fA96SvI" target="_blank" class="project-card">
-                        <div class="project-info">
-                            <span>DESTACADO</span>
-                            <h4>Escritorio Taller Mecánico</h4>
-                        </div>
+                    <a href="https://www.youtube.com/watch?v=mjr5fA96SvI" target="_blank" rel="noopener noreferrer" class="project-card">
+                        <div class="project-info"><span>DESTACADO</span><h4>Escritorio Taller Mecánico</h4></div>
                     </a>
                 </div>
             </div>
