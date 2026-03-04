@@ -119,6 +119,43 @@
             line-height: 1.6;
         }
 
+        .qr-container {
+            margin: 0 auto 2rem auto;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.4s;
+            opacity: 0;
+            text-decoration: none;
+        }
+
+        .qr-container p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            background: white;
+            padding: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .qr-container:hover .qr-code {
+            transform: scale(1.05);
+        }
+
         /* ===== TARJETAS / GLASSMORPHISM ===== */
         .courses-grid {
             display: grid;
@@ -337,6 +374,11 @@
             <h1 class="hero-title">I.E.S. 6036</h1>
             <p class="hero-subtitle">"Que este viaje nos lleve a descubrir mucho más de lo que imaginamos." Formación
                 superior e innovación técnica.</p>
+            <a href="https://hugoaguilaufidet.github.io/web3" target="_blank" class="qr-container">
+                <p>Escaneá para ingresar desde tu celular</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://hugoaguilaufidet.github.io/web3"
+                    alt="Código QR de acceso" class="qr-code">
+            </a>
         </header>
 
         <!-- TRAYECTOS FORMATIVOS -->
