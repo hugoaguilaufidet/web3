@@ -53,16 +53,18 @@
             pointer-events: none;
             /* Para que no interfieran con los clics */
             filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
+            mix-blend-mode: screen;
+            /* Clave para fondos oscuros: hace transparente el negro */
         }
 
-        .gear-3d {
+        .wrench-3d {
             top: 10%;
             left: 5%;
             width: 300px;
             animation: float 8s ease-in-out infinite, rotateSlow 20s linear infinite;
         }
 
-        .dna-3d {
+        .multimeter-3d {
             bottom: 15%;
             right: 2%;
             width: 350px;
@@ -324,8 +326,8 @@
 <body>
 
     <!-- ELEMENTOS 3D DE FONDO -->
-    <img src="gear.png" alt="" class="bg-3d-element gear-3d">
-    <img src="dna.png" alt="" class="bg-3d-element dna-3d">
+    <img src="wrench.png" alt="Llave tuerca" class="bg-3d-element wrench-3d">
+    <img src="multimeter.png" alt="Multimetro digital" class="bg-3d-element multimeter-3d">
 
     <div class="container">
         <!-- HERO SECTION -->
