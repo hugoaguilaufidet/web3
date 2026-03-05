@@ -167,6 +167,7 @@
             animation: fadeInUp 0.8s ease-out forwards;
         }
 
+        /* FIX: Agregado pointer-events: none para que no bloquee los clics */
         .bento-card::before {
             content: '';
             position: absolute;
@@ -177,6 +178,8 @@
             background: linear-gradient(45deg, transparent, rgba(16, 185, 129, 0.05), transparent);
             opacity: 0;
             transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .bento-card:hover {
@@ -255,6 +258,9 @@
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            /* Asegura que esté por encima de todo */
         }
 
         .btn-schedule:hover {
@@ -332,6 +338,8 @@
             border-radius: 12px;
             text-decoration: none;
             transition: all 0.2s ease;
+            position: relative;
+            z-index: 2;
         }
 
         .resource-link:hover {
@@ -376,6 +384,7 @@
             padding: 1rem;
             text-decoration: none;
             border: 1px solid var(--glass-border);
+            z-index: 2;
         }
 
         .project-card::after {
@@ -513,8 +522,8 @@
                 </div>
                 <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Accedé al planificador
                     online para ver fechas de entregas, exámenes y temas clase a clase.</p>
-                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vR0ADlef_u3RgGjMzHqIrBbzWnCOPCcNdmw-oM3WaVrxlHyus-JPGB4dLsEwPsxhSfxKVVQip53JMvS/pubhtml"
-                    target="_blank" class="btn-schedule">
+                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vToTXLDQs_4jsoloOBLhaHbrn9wbSXGQcfBP41pAUQZ7kx1vU2jL6BDiXpkfSVFFzcN-TS5c4fKqmfs/pubhtml"
+                    target="_blank" rel="noopener noreferrer" class="btn-schedule">
                     Ver Cronograma de Clases
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -582,18 +591,20 @@
                     Técnica y Normas
                 </div>
                 <div class="resource-list" style="margin-top: 1rem;">
-                    <a href="#" class="resource-link">
+                    <a href="https://drive.google.com/file/d/100enHSRCE7hyq3NilMoRKXX8yJHWiXR1/view" target="_blank"
+                        rel="noopener noreferrer" class="resource-link">
                         <div class="icon-box">PDF</div>
                         <div class="resource-info">
-                            <h4>Metrología Básica</h4>
+                            <h4>Metrología para NO Metrólogos</h4>
                             <p>Conceptos fundamentales</p>
                         </div>
                     </a>
-                    <a href="#" class="resource-link">
+                    <a href="https://www.argentina.gob.ar/sites/default/files/infoleg/res18-1-410054.pdf"
+                        target="_blank" rel="noopener noreferrer" class="resource-link">
                         <div class="icon-box">LEY</div>
                         <div class="resource-info">
-                            <h4>Normas EPP</h4>
-                            <p>Res. Nacional N° 896</p>
+                            <h4>Resolución 18 / 2025 - Anexo 1</h4>
+                            <p>EPP: Seguridad en el taller</p>
                         </div>
                     </a>
                 </div>
@@ -617,26 +628,30 @@
                         Recursos Visuales
                     </div>
                     <a href="https://drive.google.com/drive/folders/1RrDWUBGZt5Qfkx5P9ah900tc02OfOMYJ" target="_blank"
+                        rel="noopener noreferrer"
                         style="color: var(--accent-glow); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Drive
                         Materia →</a>
                 </div>
                 <div class="resource-list"
                     style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <a href="https://www.youtube.com/watch?v=SJTwJdjGxlE" target="_blank" class="resource-link">
+                    <a href="https://www.youtube.com/watch?v=SJTwJdjGxlE" target="_blank" rel="noopener noreferrer"
+                        class="resource-link">
                         <div class="icon-box" style="color: #ef4444;">▶</div>
                         <div class="resource-info">
                             <h4>¿Qué son las pulgadas?</h4>
                             <p>YouTube Tutorial</p>
                         </div>
                     </a>
-                    <a href="https://www.youtube.com/watch?v=5AqFALY7AEo&t=2s" target="_blank" class="resource-link">
+                    <a href="https://www.youtube.com/watch?v=5AqFALY7AEo&t=2s" target="_blank" rel="noopener noreferrer"
+                        class="resource-link">
                         <div class="icon-box" style="color: #ef4444;">▶</div>
                         <div class="resource-info">
                             <h4>De Pulgadas a Milímetros</h4>
                             <p>Conversión rápida</p>
                         </div>
                     </a>
-                    <a href="https://www.youtube.com/watch?v=wpoOebVoO14" target="_blank" class="resource-link">
+                    <a href="https://www.youtube.com/watch?v=wpoOebVoO14" target="_blank" rel="noopener noreferrer"
+                        class="resource-link">
                         <div class="icon-box" style="color: #ef4444;">▶</div>
                         <div class="resource-info">
                             <h4>Identificación de Roscas</h4>
@@ -659,16 +674,18 @@
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Proyectos destacados desarrollados por alumnos
                     durante la cursada anterior.</p>
                 <div class="hall-of-fame-grid">
-                    <a href="https://www.youtube.com/watch?v=pg637DkEluQ" target="_blank" class="project-card">
+                    <a href="https://www.youtube.com/watch?v=pg637DkEluQ" target="_blank" rel="noopener noreferrer"
+                        class="project-card">
                         <div class="project-info">
                             <span>DESTACADO</span>
-                            <h4>Mesa de Trabajo</h4>
+                            <h4>Mesa de Trabajo Robusta</h4>
                         </div>
                     </a>
-                    <a href="https://www.youtube.com/watch?v=mjr5fA96SvI" target="_blank" class="project-card">
+                    <a href="https://www.youtube.com/watch?v=mjr5fA96SvI" target="_blank" rel="noopener noreferrer"
+                        class="project-card">
                         <div class="project-info">
                             <span>DESTACADO</span>
-                            <h4>Escritorio para taller mecánico</h4>
+                            <h4>Escritorio Taller Mecánico</h4>
                         </div>
                     </a>
                 </div>
